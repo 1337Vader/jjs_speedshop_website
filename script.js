@@ -15,6 +15,16 @@ document.querySelectorAll('.mobile-nav a').forEach(a => {
   });
 });
 
+// ---- Instagram embeds: load Instagram's official embed script only if posts are present ----
+(function loadInstagramEmbeds(){
+  const grid = document.getElementById('instagramEmbeds');
+  if(!grid || !grid.children.length) return; // nothing to embed yet
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = 'https://www.instagram.com/embed.js';
+  document.body.appendChild(script);
+})();
+
 // ---- Boost gauge: draw ticks + sweep needle to redline on load ----
 (function buildGauge(){
   const cx = 150, cy = 150;
