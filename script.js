@@ -15,6 +15,25 @@ document.querySelectorAll('.mobile-nav a').forEach(a => {
   });
 });
 
+// ---- Scroll reveal ----
+(function scrollReveal(){
+  const items = document.querySelectorAll('.reveal');
+  if(!items.length) return;
+  if(!('IntersectionObserver' in window)){
+    items.forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+  items.forEach(el => io.observe(el));
+})();
+
 // ---- Instagram embeds: load Instagram's official embed script only if posts are present ----
 (function loadInstagramEmbeds(){
   const grid = document.getElementById('instagramEmbeds');
